@@ -19,7 +19,8 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         
   test:
-    if: steps.check.outputs.triggered == 'true'
+    needs: deploy
+    if: needs.deploy.steps.check.outputs.triggered == 'true'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
