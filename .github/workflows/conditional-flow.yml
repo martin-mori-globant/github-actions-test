@@ -2,8 +2,15 @@ name: Android Tests
 
 on:
   pull_request:
+    branches: 
+      - '*'
+      - '!develop'
+      - '!master'
+      - '!release*'
     types: opened
   issue_comment:
+    branches: 
+      - '*'
     types: created
 
 jobs:
