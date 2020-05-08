@@ -1,6 +1,9 @@
 name: Feature Test CI
 
 on:
+  pull_request:
+    branches: 
+      - develop
   push:
     branches: 
      - '*'
