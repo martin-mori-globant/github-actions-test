@@ -36,5 +36,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run script
       run: sh .github/scripts/test_app.sh
-    - name: Echo
-      run: echo 'echo ' $needs.deploy.steps.check.outputs.triggered
+    - name: Echooo
+      run: echo 'echo corrio linea'
+      if: needs.deploy.steps.check.outputs.triggered == 'true'
