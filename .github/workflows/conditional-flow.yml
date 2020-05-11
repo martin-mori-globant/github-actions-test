@@ -23,6 +23,8 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - name: Set COMMENT FOUND
         run: echo '::set-env name=COMMENT_FOUND::steps.check.outputs.triggered'
+      - name: get COMMENT FOUND
+        run: echo 'echo corrio linea $COMMENT_FOUND'
         
   test:
     needs: deploy
