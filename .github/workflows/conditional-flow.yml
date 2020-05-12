@@ -22,9 +22,9 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - name: Set COMMENT FOUND
-        run: echo '::set-env name=COMMENT_FOUND::steps.check.outputs.triggered'
+        run: ::set-env name=COMMENT_FOUND::steps.check.outputs.triggered
       - name: get COMMENT FOUND
-        run: echo 'echo corrio linea' $COMMENT_FOUND
+        run: echo 'echo corrio linea ${{COMMENT_FOUND}}'
         
   test:
     needs: deploy
@@ -42,5 +42,5 @@ jobs:
       run: sh .github/scripts/test_app.sh
     - name: Echooo
       run: echo 'echo corrio linea $COMMENT_FOUND'
-      if: needs.deploy.steps.check.outputs.triggered == 'true'
+      if: $COMMENT_FOUND == 'true'
       
