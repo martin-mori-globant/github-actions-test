@@ -24,7 +24,7 @@ jobs:
       - name: current path
         run: pwd
       - name: Run tests
-        run: sh .github/scripts/test_app.sh
+        run: ./.github/scripts/test_app.sh
         if: steps.check.outputs.triggered == 'true'
         
   #test:
