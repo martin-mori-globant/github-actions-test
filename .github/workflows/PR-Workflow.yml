@@ -49,7 +49,7 @@ jobs:
       #  run: bash ./gradlew assembleDebug --stacktrace
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/apk/release
+          releaseDirectory: app/build/outputs/apk/debug
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
             name: app
-            path: app/build/outputs/apk/release/app-release.apk
+            path: app/build/outputs/apk/debug/app-debug.apk
       - name: Deploy to App Center
         uses: wzieba/AppCenter-Github-Action@v1.0.0
         with:
