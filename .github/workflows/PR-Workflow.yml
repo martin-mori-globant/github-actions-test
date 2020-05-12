@@ -46,12 +46,20 @@ jobs:
         with:
           java-version: 1.8
       - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+      #  run: bash ./gradlew assembleDebug --stacktrace
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+  
       - name: Store APK
         uses: actions/upload-artifact@v1
         with:
             name: app
-            path: app/build/outputs/apk/debug/app-debug.apk
+            path: app/build/outputs/apk/release/app-release.apk
       - name: Deploy to App Center
         uses: wzieba/AppCenter-Github-Action@v1.0.0
         with:
