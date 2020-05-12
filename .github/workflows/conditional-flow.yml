@@ -21,8 +21,10 @@ jobs:
           reaction: '+1'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Give permissions
+        run: chmod +x .github/scripts/test_app.sh
       - name: Run tests
-        run: chmod +x sh .github/scripts/test_app.sh
+        run: sh .github/scripts/test_app.sh
         if: steps.check.outputs.triggered == 'true'
         
   #test:
