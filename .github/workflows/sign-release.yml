@@ -2,9 +2,7 @@ name: Sign Release CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: sign-release
 
 jobs:
   build:
