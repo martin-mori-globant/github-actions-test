@@ -25,9 +25,9 @@ jobs:
         run: pwd
       - uses: actions/checkout@v2
       - name: give permissions
-        run: .github/scripts/give_permissions_gradle.sh
+        run: sh .github/scripts/give_permissions_gradle.sh
       - name: Run tests
-        run: .github/scripts/test_app.sh
+        run: sh .github/scripts/test_app.sh
         if: steps.check.outputs.triggered == 'true'
         
   #test:
