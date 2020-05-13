@@ -20,12 +20,6 @@ jobs:
         run: sh .github/scripts/give_permissions_gradle.sh
       - name: Build with Gradle
         run: sh .github/scripts/build_app_debug.sh
-  
-      #- name: Store APK
-      #  uses: actions/upload-artifact@v1
-      #  with:
-      #      name: app
-      #      path: app/build/outputs/apk/debug/app-debug.apk
       - name: Deploy to App Center
         uses: wzieba/AppCenter-Github-Action@v1.0.0
         with:
