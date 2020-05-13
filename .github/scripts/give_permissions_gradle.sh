@@ -1,1 +1,1 @@
-bash chmod +x ./gradlew 
+chmod +x ./gradlew 
