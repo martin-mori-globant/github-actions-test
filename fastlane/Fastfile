@@ -25,16 +25,14 @@ platform :android do
     # reset_simulator_contents
     # clear_derived_data
     bundle_install
-	gradle clean
-	build_dev
-	unit_test_dev
+    build_dev
+    unit_test_dev
   end
 
   desc "Build Dev mode"
   lane :build_dev do
     gradle(
-      task: 'assemble',
-      build_type: 'Dev'
+      task: 'assembleDebug'
     )
   end
 
@@ -57,7 +55,7 @@ platform :android do
   desc "Runs unit tests on dev env"
   lane :unit_test_dev do
     gradle(
-      task: "testDevUnitTest"
+      task: "testDebugUnitTest"
     )
   end
 

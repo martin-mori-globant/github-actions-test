@@ -22,12 +22,13 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - uses: actions/checkout@v2
-      - name: Give permissions
-        run: sh .github/scripts/give_permissions_gradle.sh
-      
-      - name: Bundle Install
-        run: bundle install
         
+      - name: Fastlane install 
+        run: brew install fastlane
+        
+      - name: Bundle Install
+        run: bundle install 
+
       - name: Run tests
         # run: sh .github/scripts/test_app.sh
         run: bundle exec fastlane github_build
