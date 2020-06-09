@@ -32,8 +32,7 @@ platform :android do
   desc "Build Dev mode"
   lane :build_dev do
     gradle(
-      task: 'assemble',
-      build_type: 'Dev'
+      task: 'assembleDebug'
     )
   end
 
