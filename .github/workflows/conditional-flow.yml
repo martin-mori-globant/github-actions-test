@@ -1,4 +1,4 @@
-name: Android Tests
+name: Android On Demand Tests
 
 on:
   pull_request:
@@ -25,6 +25,7 @@ jobs:
       - name: Give permissions
         run: sh .github/scripts/give_permissions_gradle.sh
       - name: Run tests
-        run: sh .github/scripts/test_app.sh
+        # run: sh .github/scripts/test_app.sh
+        run: bundle exec fastlane github_build
         if: steps.check.outputs.triggered == 'true'
       
