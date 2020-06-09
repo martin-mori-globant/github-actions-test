@@ -24,8 +24,8 @@ platform :android do
     # sh("pod", "update", "SmileDirectCoreUI")
     # reset_simulator_contents
     # clear_derived_data
-	gradle clean
     bundle_install
+	gradle clean
 	build_dev
 	unit_test_dev
   end
