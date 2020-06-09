@@ -55,7 +55,7 @@ platform :android do
   desc "Runs unit tests on dev env"
   lane :unit_test_dev do
     gradle(
-      task: "testDevUnitTest"
+      task: "testDebugUnitTest"
     )
   end
 
