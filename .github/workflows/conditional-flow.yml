@@ -12,7 +12,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
       - uses: khan/pull-request-comment-trigger@master
         id: check
@@ -24,6 +24,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Give permissions
         run: sh .github/scripts/give_permissions_gradle.sh
+      
+      - name: Bundle Install
+        run: bundle install
+        
       - name: Run tests
         # run: sh .github/scripts/test_app.sh
         run: bundle exec fastlane github_build
