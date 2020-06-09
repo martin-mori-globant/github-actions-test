@@ -1,0 +1,146 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.14.2"
+default_platform :android
+
+platform :android do
+
+  lane :github_build do
+    build_and_test_debug
+  end
+  
+  lane :build_and_test_debug do
+    # sh("pod", "update", "SmileDirectCoreUI")
+    # reset_simulator_contents
+    # clear_derived_data
+	gradle clean
+    bundle_install
+	build_dev
+	unit_test_dev
+  end
+
+  desc "Build Dev mode"
+  lane :build_dev do
+    gradle(
+      task: 'assemble',
+      build_type: 'Dev'
+    )
+  end
+
+  desc "Build Staging mode"
+  lane :build_staging do
+    gradle(
+      task: 'assemble',
+      build_type: 'Staging'
+    )
+  end
+
+  desc "Build Release mode"
+  lane :build_prod do
+    gradle(
+      task: 'assemble',
+      build_type: 'Prod'
+    )
+  end
+
+  desc "Runs unit tests on dev env"
+  lane :unit_test_dev do
+    gradle(
+      task: "testDevUnitTest"
+    )
+  end
+
+  # desc "Runs unit tests on staging env"
+  # lane :unit_test_staging do
+  #   gradle(
+  #     task: "testStagingUnitTest"
+  #   )
+  # end
+
+  # desc "Runs instrumentation tests"
+  # lane :ui_test do
+  #   gradle(
+  #     task: 'connectedAndroidTest'
+  #   )
+  # end
+
+  # desc "Create debug coverage report"
+  # lane :code_coverage do
+  #   gradle(
+  #     task: "testDevUnitTestCoverage" # "createDebugCoverageReport"
+  #   )
+  # end
+
+  # desc "Lint tool "
+  # lane :linter_validation do
+  #   gradle(
+  #     task: "Lint",
+  #     build_type: "Dev"
+  #   )
+  # end
+
+  # desc "Submit a new dev build to app center"
+  # lane :deploy_develop_to_appcenter do
+  #   gradle(
+  #     task: 'assemble',
+  #     build_type: 'Dev'
+  #   )
+
+  #   branch_name = git_branch.gsub("/", "-").sub("feature-", "").sub("-main","")
+
+
+  #   appcenter_upload(
+  #     api_token: "7fe0174c4c271ee161bedfbfae791b2030fa3925",
+  #     owner_name: "somosmach",
+  #     app_name: "#{branch_name}-android-dev",
+  #     apk: "./app/build/outputs/apk/Dev/app-Dev.apk",
+  #     group: "devs-android,ux-qc",
+  #     release_notes: "release notes here"
+  #   )
+
+  # end
+
+  # desc "Deploy a new version to the Google Play"
+  # lane :deploy do
+  #   gradle(
+  #     task: 'assemble',
+  #     build_type: 'Prod'
+  #   )
+  #   supply
+  # end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal cl.bci.sismo.mach.data is sent or shared. Learn more at https://github.com/fastlane/enhancer
