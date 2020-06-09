@@ -28,6 +28,7 @@ jobs:
         
       - name: Bundle Install
         run: bundle install 
+
       - name: Run tests
         # run: sh .github/scripts/test_app.sh
         run: bundle exec fastlane github_build
