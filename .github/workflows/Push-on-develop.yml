@@ -20,11 +20,11 @@ jobs:
       - name: Fastlane install 
         run: brew install fastlane
         
-      - name: Bundle Install
-        run: bundle install
-         
       - name: Give permissions
         run: sh .github/scripts/give_permissions_gradle.sh
-        
-      - name: Run tests
-        run: bundle exec fastlane github_build
+      
+      - name: Bundle Install
+        run: bundle install 
+          
+      - name: Run Build, Tests and Deploy
+        run: bundle exec fastlane deploy_develop_to_appcenter
