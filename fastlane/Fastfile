@@ -88,7 +88,7 @@ platform :android do
       api_token: ENV["APP_CENTER_TOKEN"],
       owner_name: "SmileDirectClub",
       owner_type: "organization",
-      app_name: "SmileDirectClub/SmileBuddy-Stable-1",
+      app_name: "SmileBuddy-Stable-1",
       apk: "./app/build/outputs/apk/debug/app-debug.apk",
       destinations: "Dev Team",
       release_notes: "release notes here"
