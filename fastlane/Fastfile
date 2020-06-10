@@ -42,9 +42,11 @@ platform :android do
   
   desc "Bump version Code"
   lane :android_version_bump do
-    commit_android_version_bump(
-      gradle_file_folder:"./app"
-    )
+    increment_version_code(
+        gradle_file_path: "project/build.gradle",
+        #ext_constant_name: "test"
+        #app_folder_name:"app"
+  )
   end
   
   desc "Submit a new dev build to app center"
