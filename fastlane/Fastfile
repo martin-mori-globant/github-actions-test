@@ -54,7 +54,7 @@ platform :android do
     
     build_and_test_debug
     
-    debug_build_deploy_b2c
+    # debug_build_deploy_b2c
 
   end
   
