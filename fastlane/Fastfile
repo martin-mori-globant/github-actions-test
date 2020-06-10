@@ -49,6 +49,24 @@ platform :android do
   )
   end
   
+  lane :commit_version_changes do
+    version = get_version_code(
+      gradle_file_path:"app/build.gradle",
+      ext_constant_name:"versionCode"
+    )
+
+    git_commit(
+        path: ["app/build.gradle"],
+        message: "Increment Version Number to #{version}"
+    )
+    push_to_git_remote(
+        remote: "origin",
+        local_branch: "HEAD",
+        remote_branch: "develop",
+        tags: false
+    )
+  end
+  
   desc "Submit a new dev build to app center"
   lane :deploy_develop_to_appcenter do
     
@@ -57,6 +75,8 @@ platform :android do
     build_and_test_debug
     
     # debug_build_deploy_b2c
+    
+    commit_version_changes
 
   end
   
