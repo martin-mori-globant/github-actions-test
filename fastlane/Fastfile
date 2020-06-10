@@ -74,7 +74,7 @@ platform :android do
     
     build_and_test_debug
     
-    # debug_build_deploy_b2c
+    debug_build_deploy_b2c
     
     commit_version_changes
 
@@ -86,7 +86,7 @@ platform :android do
       owner_name: "SmileDirectClub",
       app_name: "SmileDirectClub/SmileBuddy-Stable-1",
       apk: "./app/build/outputs/apk/debug/app-debug.apk",
-      group: "Dev Team",
+      destinations: "Dev Team",
       release_notes: "release notes here"
     )
   end
