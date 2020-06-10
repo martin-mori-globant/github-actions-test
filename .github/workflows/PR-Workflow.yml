@@ -8,7 +8,7 @@ on:
 jobs: 
   apk:
     name: Generate APK
-    runs-on: ubuntu-18.04
+    runs-on: macOS-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -16,14 +16,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          
+      - name: Fastlane install 
+        run: brew install fastlane
+        
+      - name: Bundle Install
+        run: bundle install
+         
       - name: Give permissions
         run: sh .github/scripts/give_permissions_gradle.sh
-      - name: Build with Gradle
-        run: sh .github/scripts/build_app_debug.sh
-      - name: Deploy to App Center
-        uses: wzieba/AppCenter-Github-Action@v1.0.0
-        with:
-          appName: SmileDirectClub/SmileBuddy-Stable-1
-          token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Dev Team
-          file: app/build/outputs/apk/debug/app-debug.apk
+        
+      - name: Run tests
+        run: bundle exec fastlane github_build
