@@ -11,8 +11,8 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "2.14.2"
-default_platform :android
+  
+default_platform(:android)
 
 platform :android do
 
@@ -21,9 +21,6 @@ platform :android do
   end
   
   lane :build_and_test_debug do
-    # sh("pod", "update", "SmileDirectCoreUI")
-    # reset_simulator_contents
-    # clear_derived_data
     bundle_install
     build_dev
     unit_test_dev
@@ -36,26 +33,39 @@ platform :android do
     )
   end
 
-  desc "Build Staging mode"
-  lane :build_staging do
-    gradle(
-      task: 'assemble',
-      build_type: 'Staging'
-    )
-  end
-
-  desc "Build Release mode"
-  lane :build_prod do
-    gradle(
-      task: 'assemble',
-      build_type: 'Prod'
-    )
-  end
-
   desc "Runs unit tests on dev env"
   lane :unit_test_dev do
     gradle(
       task: "testDebugUnitTest"
+    )
+  end
+  
+  desc "Bump version Code"
+  lane :android_version_bump do
+    commit_android_version_bump(
+      gradle_file_folder:"project"
+    )
+  end
+  
+  desc "Submit a new dev build to app center"
+  lane :deploy_develop_to_appcenter do
+    
+    android_version_bump
+    
+    build_and_test_debug
+    
+    debug_build_deploy_b2c
+
+  end
+  
+  lane :debug_build_deploy_b2c do
+    appcenter_upload(
+      api_token: ENV["APP_CENTER_TOKEN"],
+      owner_name: "SmileDirectClub",
+      app_name: "SmileDirectClub/SmileBuddy-Stable-1",
+      apk: "./app/build/outputs/apk/debug/app-debug.apk",
+      group: "Dev Team",
+      release_notes: "release notes here"
     )
   end
 
